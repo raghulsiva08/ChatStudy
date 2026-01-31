@@ -1,5 +1,6 @@
 # Ex. No:1b 			Study of Client Server Chat Applications
-
+#REF NO:25015705
+#Date:31-01-2026
 ## Aim: 
 To perform a study on Client Server Chat Applications
 ## Introduction:
@@ -72,6 +73,132 @@ User authentication mechanisms are essential to ensure secure and authorized acc
 Client-server chat applications are versatile tools that facilitate real-time communication between users over a network. They incorporate various components, including server-side and client-side elements, and must consider factors such as security, scalability, and concurrency. As technology continues to advance, client-server chat applications remain integral for collaborative communication in various domains.
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
+
+Algorithm for Chat Server Program
+
+1.Start the program.
+
+2.Import the socket module.
+
+3.Create a TCP socket using socket(AF_INET, SOCK_STREAM).
+
+4.Assign the server IP address (127.0.0.1) and port number.
+
+5.Bind the socket to the specified IP address and port.
+
+6.Put the server socket into listening mode using listen().
+
+7.Wait for a client connection using accept().
+
+8.Display the client’s address after successful connection.
+
+9.Repeat the following steps until the client sends "exit":
+
+Receive the message from the client using recv().
+
+If the received message is "exit", terminate the chat.
+
+Display the client message.
+
+Read a message from the server user.
+
+Send the server message to the client.
+
+10.Close the client connection.
+
+11.Close the server socket.
+
+12.Stop the program.
+
+Algorithm for Chat Client Program
+
+1.Start the program.
+
+2.Import the socket module.
+
+3.Create a TCP socket using socket(AF_INET, SOCK_STREAM).
+
+4.Specify the server IP address (127.0.0.1) and port number.
+
+5.Connect to the server using connect().
+
+6.Display a message indicating successful connection.
+
+7.Repeat the following steps until the user enters "exit":
+
+Read a message from the client user.
+
+Send the message to the server.
+
+If the message is "exit", terminate the chat.
+
+Receive the reply from the server using recv().
+
+Display the server message.
+
+8.Close the client socket.
+
+9.Stop the program.
+
+PROGRAM:
+server-side.py
+~~~
+import socket
+from base64 import decode
+from operator import truediv
+
+server =socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(('localhost', 9999))
+server.listen()
+client,addr=server.accept()
+
+done = False
+
+while not done:
+    msg = client.recv(1024).decode('utf-8')
+
+    if msg == 'quit':
+        done = True
+    else:
+        print(msg)
+
+    client.send(input("Message ").encode('utf-8'))
+
+
+client.close()
+server.close()
+~~~
+
+client-side.py
+~~~
+import socket
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+client.connect(("localhost", 9999))
+
+done=False
+
+while not done:
+    client.send(input("Message ").encode('utf-8'))
+    msg = client.recv(1024).decode('utf-8')
+
+    if msg == 'quit':
+        done=True
+    else:
+        print(msg)
+
+
+
+client.close()
+~~~
+OUTPUT:
+server-side:
+<img width="1913" height="1078" alt="Screenshot 2026-01-31 113008" src="https://github.com/user-attachments/assets/62c881ed-ee4e-4d83-a710-a9cafd89366e" />
+
+client-side
+<img width="1919" height="1079" alt="Screenshot 2026-01-31 113633" src="https://github.com/user-attachments/assets/76a65121-9f4a-439f-81e5-bc9bccf35653" />
+
 
 
 ## Result:
